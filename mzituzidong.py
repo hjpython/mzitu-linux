@@ -12,7 +12,7 @@ def xiazai_mzitu(url):
     html = urllib.request.urlopen(url)
     page = BeautifulSoup(html.read(),'lxml').find("div",{"class":"pagenavi"}).findAll("span")[-2].get_text()
     try:
-        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title)+ page)
+        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title)+page)
     except:
         return 
     after = int(page)+1
