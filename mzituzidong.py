@@ -12,7 +12,7 @@ def xiazai_mzitu(url):
     html = urllib.request.urlopen(url)
     page = BeautifulSoup(html.read(),'lxml').find("div",{"class":"pagenavi"}).findAll("span")[-2].get_text()
     try:
-        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title))
+        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title)+ page)
     except:
         return 
     after = int(page)+1
@@ -31,7 +31,7 @@ def xiazai_mzitu(url):
             req.add_header("Connection","keep-alive")        
             req.add_header("Host","i.meizitu.net")           
             img = urllib.request.urlopen(req).read()         
-            f = open("/home/hj/python/pic/mzitu/"+title+"/"+str(i)+".jpg","wb")
+            f = open("/home/hj/python/pic/mzitu/"+title+page+"/"+str(i)+".jpg","wb")
             f.write(img)                 
             f.close()
         except urllib.error.URLError as e:
@@ -63,10 +63,10 @@ def xiazai_mzitu_sql(url):
     html = urllib.request.urlopen(url)
     page = BeautifulSoup(html,'lxml').find("div",{"class":"pagenavi"}).findAll("span")[-2].get_text()
     try:
-        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title))
+        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title)+page)
     except:         
-        shutil.rmtree(r"/home/hj/python/pic/mzitu/"+str(title))
-        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title))
+        shutil.rmtree(r"/home/hj/python/pic/mzitu/"+str(title)+page)
+        os.makedirs(r"/home/hj/python/pic/mzitu/"+str(title)+page)
     after = int(page)+1
     for i in range(1,after):
         try:
@@ -83,7 +83,7 @@ def xiazai_mzitu_sql(url):
             req.add_header("Connection","keep-alive")        
             req.add_header("Host","i.meizitu.net")           
             img = urllib.request.urlopen(req).read()         
-            f = open("/home/hj/python/pic/mzitu/"+title+"/"+str(i)+".jpg","wb")
+            f = open("/home/hj/python/pic/mzitu/"+title+page+"/"+str(i)+".jpg","wb")
             f.write(img)                 
             f.close()
         except urllib.error.URLError as e:
